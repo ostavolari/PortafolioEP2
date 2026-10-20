@@ -15,7 +15,7 @@ Aplicación web interactiva de tipo "Portafolio Personal" en formato Single Page
 
 1. Abrir una terminal en la carpeta raíz del proyecto (donde se encuentra `package.json`).
 2. Instalar las dependencias del proyecto:
-
+(A veces solo npm no me funcionó, así que npm.cmd solucionaba todo)
 ```bash
 npm install
 ```
