@@ -17,17 +17,42 @@
   border-radius: 8px;
 }
 
+/* Encabezados y títulos generales */
 .titulo-seccion {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .titulo-seccion h1 {
   margin: 0 0 8px;
-  color: #222;
+  color: #1f1f1f;
+  font-size: 2rem;
 }
 
 .titulo-seccion p {
   color: #666;
+  font-size: 1rem;
+}
+
+/* Tipografía para la sección Personal */
+.personal-seccion h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1f1f1f;
+  margin-bottom: 4px;
+}
+
+.personal-seccion h4 {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #595959;
+  margin-bottom: 16px;
+}
+
+.personal-seccion p {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: #434343;
+  margin-bottom: 20px;
 }
 
 .proyecto-placeholder {

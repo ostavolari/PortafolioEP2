@@ -20,9 +20,9 @@ const { Sider, Content } = Layout;
 
 const perfilInicial = {
   nombre: 'Oscar Tavolari Galvez',
-  titulo: 'Desarrollador Fullstack en desarrollo, musico sesionista',
+  titulo: 'Desarrollador Fullstack en desarrollo - Músico Sesionista',
   descripcion:
-    'Estudiante de Analisis Programador (4. semestre, Duoc UC) enfocado en el desarrollo Full Stack, con una clara preferencia por el Backend. Me motivan los proyectos desafiantes donde la logica, los numeros y el procesamiento de datos sean los protagonistas. Aun no he tenido la oportunidad de participar en un proyecto real, fuera de DuocUC. Ademas, soy musico sesionista (guitarra y bajo) y sonidista aficionado, lo que me aporta disciplina, buena oreja para el trabajo en equipo y rigor con la estructura.',
+    'Estudiante de Analista Programador en Duoc UC (4.º semestre) enfocado en el desarrollo Full Stack, con un claro interés por el Backend. Me apasiona resolver problemas complejos donde la lógica, el procesamiento de datos y la arquitectura sean protagonistas. Como músico sesionista y sonidista aficionado, he desarrollado disciplina, trabajo en equipo y atención al detalle, cualidades que aplico día a día en la escritura de código limpio y estructurado.',
   // Profe no tengo ninguna foto donde este sobrio asi que puse la mas decente, disculpe
   foto: '/img/perfil.jpeg',
 };
