@@ -2,8 +2,8 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import Contacto from './Contacto';
 
+// datos de prueba: solo GitHub, sin LinkedIn
 const redes = [
-  { id: 'linkedin', nombre: 'LinkedIn', url: 'https://www.linkedin.com/' },
   { id: 'github', nombre: 'GitHub', url: 'https://github.com/' },
 ];
 
@@ -12,11 +12,10 @@ const enviar = () => fireEvent.click(screen.getByRole('button', { name: 'Enviar 
 describe('Componente Contacto', () => {
   it('debe mostrar los enlaces a redes sociales', () => {
     render(<Contacto redes={redes} />);
-    expect(screen.getByRole('link', { name: 'LinkedIn' })).toHaveAttribute('href', 'https://www.linkedin.com/');
     expect(screen.getByRole('link', { name: 'GitHub' })).toBeInTheDocument();
   });
 
-  it('debe mostrar errores si se envía el formulario vacío', () => {
+  it('debe mostrar errores si se envia el formulario vacio', () => {
     render(<Contacto redes={redes} />);
     enviar();
     expect(screen.getByText('El nombre es obligatorio.')).toBeInTheDocument();
@@ -24,19 +23,19 @@ describe('Componente Contacto', () => {
     expect(screen.getByText('El mensaje es obligatorio.')).toBeInTheDocument();
   });
 
-  it('debe mostrar error si el correo es inválido', () => {
+  it('debe mostrar error si el correo es invalido', () => {
     render(<Contacto redes={redes} />);
     fireEvent.change(screen.getByLabelText('Correo'), { target: { value: 'correo-malo' } });
     enviar();
-    expect(screen.getByText('Formato de correo inválido.')).toBeInTheDocument();
+    expect(screen.getByText('Formato de correo invalido.')).toBeInTheDocument();
   });
 
-  it('debe confirmar el envío cuando los datos son válidos', () => {
+  it('debe confirmar el envio cuando los datos son validos', () => {
     render(<Contacto redes={redes} />);
     fireEvent.change(screen.getByLabelText('Nombre'), { target: { value: 'Ana' } });
     fireEvent.change(screen.getByLabelText('Correo'), { target: { value: 'ana@correo.com' } });
     fireEvent.change(screen.getByLabelText('Mensaje'), {
-      target: { value: 'Hola, me gustó tu portafolio' },
+      target: { value: 'Hola, me gusto tu portafolio' },
     });
     enviar();
     expect(screen.getByText('Mensaje enviado correctamente.')).toBeInTheDocument();

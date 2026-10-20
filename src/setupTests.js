@@ -14,6 +14,5 @@ Object.defineProperty(window, 'matchMedia', {
     }),
 })
 
-// Ant Design consulta getComputedStyle; JSDOM no implementa los pseudo-elementos.
 const getComputedStyleOriginal = window.getComputedStyle
 window.getComputedStyle = (elemento) => getComputedStyleOriginal(elemento)

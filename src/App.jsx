@@ -18,14 +18,12 @@ import './App.css';
 
 const { Sider, Content } = Layout;
 
-// Datos iniciales del portafolio personal (fuente de verdad en App)
 const perfilInicial = {
-  
   nombre: 'Oscar Tavolari Galvez',
-  titulo: 'Desarrollador Fullstack en desarrollo, músico sesionista',
+  titulo: 'Desarrollador Fullstack en desarrollo, musico sesionista',
   descripcion:
-    'Estudiante de Análisis Programador (4.º semestre, Duoc UC) enfocado en el desarrollo Full Stack, con una clara preferencia por el Backend. Me motivan los proyectos desafiantes donde la lógica, los números y el procesamiento de datos sean los protagonistas. Aún no he tenido la oportunidad de participar en un proyecto real, fuera de DuocUC. Además, soy músico sesionista (guitarra y bajo) y sonidista aficionado, lo que me aporta disciplina, buena oreja para el trabajo en equipo y rigor con la estructura.',
-  // Profe no tengo ninguna foto donde esté sobrio así que puse la más decente, disculpe
+    'Estudiante de Analisis Programador (4. semestre, Duoc UC) enfocado en el desarrollo Full Stack, con una clara preferencia por el Backend. Me motivan los proyectos desafiantes donde la logica, los numeros y el procesamiento de datos sean los protagonistas. Aun no he tenido la oportunidad de participar en un proyecto real, fuera de DuocUC. Ademas, soy musico sesionista (guitarra y bajo) y sonidista aficionado, lo que me aporta disciplina, buena oreja para el trabajo en equipo y rigor con la estructura.',
+  // Profe no tengo ninguna foto donde este sobrio asi que puse la mas decente, disculpe
   foto: '/img/perfil.jpeg',
 };
 
@@ -35,9 +33,8 @@ const experienciasIniciales = [
     empresa: 'Britt Coffee & Bakery',
     cargo: 'Barista',
     inicio: 'Septiembre 2022',
-    termino: 'Enero 2023'
+    termino: 'Enero 2023',
   },
-    
   {
     id: 2,
     empresa: 'Comercial Lakshmi LTDA.',
@@ -59,20 +56,20 @@ const estudiosIniciales = [
     id: 1,
     institucion: 'Universidad Alberto Hurtado',
     titulo: 'Derecho',
-    anio: '2022 - 2022(No continuada)',
+    anio: '2022 - 2022 (No continuada)',
   },
   {
     id: 2,
-    institucion: 'Universidad Metropolitana de Ciencias de la Educación (Ex-Pedagógico)',
-    titulo: 'Pedagogía en Música',
+    institucion: 'Universidad Metropolitana de Ciencias de la Educacion (Ex-Pedagogico)',
+    titulo: 'Pedagogia en Musica',
     anio: '2023 - 2023 (No continuada)',
   },
   {
     id: 3,
-    institucion: 'Duoc UC, Sede Maipú',
+    institucion: 'Duoc UC, Sede Maipu',
     titulo: 'Analista Programador',
     anio: '2025 - Actualidad',
-  }
+  },
 ];
 
 const proyectosIniciales = [
@@ -80,19 +77,19 @@ const proyectosIniciales = [
     id: 1,
     titulo: 'Instrumentum',
     categoria: 'WebAPI RESTful',
-    imagen: 'public/img/MER-instrumentum.png',
-    repositorio: 'https://github.com/vicbustosf/Instrumentum_Bustos_Tavolari_010D.git'
+    imagen: '/img/MER-instrumentum.png',
+    repositorio: 'https://github.com/vicbustosf/Instrumentum_Bustos_Tavolari_010D.git',
   },
   {
     id: 2,
     titulo: 'Tienda DecoHogar',
     categoria: 'HTML',
-    imagen: 'public/img/decohogar.png',
+    imagen: '/img/decohogar.png',
     repositorio: 'https://github.com/ostavolari/Evaluacion_Parcial_1-CASO-5_TIENDA_DECOHOGAR.git',
-  }
-  
+  },
 ];
 
+// Solo GitHub, sin LinkedIn
 const redesIniciales = [
   { id: 'github', nombre: 'GitHub', url: 'https://github.com/ostavolari' },
 ];
@@ -102,29 +99,45 @@ const contactoInicial = {
   ubicacion: 'Santiago, Chile',
 };
 
+// ─── COMPONENTE PRINCIPAL ────────────────────────────────────────────────────
 function App() {
+  // collapsed: controla si el menu lateral esta abierto o compacto
   const [collapsed, setCollapsed] = useState(false);
+
+  // pagina: guarda en que seccion esta parado el usuario ('1' a '5')
+  // con esto hacemos la navegacion sin necesidad de React Router
   const [pagina, setPagina] = useState('1');
 
-  // Estados de datos administrados en App
+  // Los datos se guardan en estado para que React los "recuerde" entre renders
   const [perfil] = useState(perfilInicial);
   const [experiencias] = useState(experienciasIniciales);
   const [estudios] = useState(estudiosIniciales);
   const [redes] = useState(redesIniciales);
   const [contacto] = useState(contactoInicial);
 
+  // useProyectos maneja la carga simulada (timeout de 500ms) y el filtro de busqueda
   const { proyectos, cargando, busqueda, setBusqueda } = useProyectos(proyectosIniciales);
 
+  // useEffect corre una sola vez al montar el componente
+  // actualiza el titulo que aparece en la pestana del navegador
   useEffect(() => {
     document.title = `${perfil.nombre} | Portafolio`;
   }, [perfil.nombre]);
 
+  // funcion corta para saltar directo a la seccion de Contacto
   const irAContacto = () => setPagina('5');
 
   return (
+    // Layout de Ant Design: envuelve todo y usa flex por debajo
     <Layout className="app-layout">
+
+      {/* Sider: la barra lateral con el menu. Se puede plegar con el boton abajo */}
       <Sider collapsible collapsed={collapsed} onCollapse={setCollapsed}>
         <div className="logo">Mi Portafolio</div>
+
+        {/* Menu: cada item tiene una key numerica.
+            selectedKeys marca cual esta activo.
+            onClick actualiza el estado 'pagina' */}
         <Menu
           theme="dark"
           mode="inline"
@@ -142,6 +155,8 @@ function App() {
 
       <Layout>
         <Content className="contenido">
+          {/* Renderizado condicional: solo se muestra el componente
+              cuya key coincida con el valor actual de 'pagina' */}
           {pagina === '1' && <Personal perfil={perfil} onContacto={irAContacto} />}
           {pagina === '2' && <Experiencia experiencias={experiencias} />}
           {pagina === '3' && <Estudios estudios={estudios} />}
@@ -156,6 +171,7 @@ function App() {
           {pagina === '5' && <Contacto redes={redes} />}
         </Content>
 
+        {/* Footer siempre visible, no depende de que pagina este abierta */}
         <Footer
           nombre={perfil.nombre}
           correo={contacto.correo}
@@ -165,61 +181,44 @@ function App() {
     </Layout>
   );
 }
+
 /*
------------ CONVERSACIÓN CON IA (Gemini 3.8 flash high) ----------------------
+----------- CONVERSACION CON IA (Gemini flash) --------------------------------
 
-- ¿Esclavo, q puedo hacer para crear un menu lateral que cambie de sección en una sola 
-página sin enredarme y dónde guardo mis datos sin complicarme con carpetas extra?"
+- Esclavo, que puedo hacer para crear un menu lateral que cambie de seccion en una sola
+pagina sin enredarme y donde guardo mis datos sin complicarme con carpetas extra?
 
-- La solución:
+- La solucion:
 
-Para resolver eso de la forma más básica y limpia posible , lo que puedes hacer es: 1. Crear un estado simple con un número para saber en qué pestaña estás
+Para resolver eso de la forma mas basica y limpia posible, lo que podes hacer es:
 
-En lugar de instalar React Router o sistemas avanzados de navegación, puedes usar un simple useState que guarde un texto o número (por ejemplo, '1' para Inicio, '2' para Experiencia, etc.):
+1. Un estado simple con un numero para saber en que pestana estas.
+   En lugar de instalar React Router, usas useState con '1', '2', etc.
 
-jsx
-const [pagina, setPagina] = useState('1');
-2. Usar App.jsx como el "cerebro" donde viven todos tus datos
+   const [pagina, setPagina] = useState('1');
 
-Para no crear carpetas raras ni enredarte con archivos de datos por fuera:
+2. App.jsx como el "cerebro" donde viven todos tus datos.
+   Guarda la info directamente en estados dentro de App.jsx.
+   App es la duena de la informacion y se la presta a cada vista con props.
 
-Guardas tu información directamente en estados dentro de App.jsx (perfil, estudios, experiencias):
-jsx
-const [perfil] = useState(perfilInicial);
-const [experiencias] = useState(experienciasIniciales);
+3. Conectar el menu de Ant Design con ese numero.
+   Cada boton del menu tiene key: '1', key: '2', etc.
+   Al hacer clic se llama setPagina(key) y React actualiza todo.
 
-Así cumples la regla de que App es la dueña de la información, y simplemente se la "presta" a cada vista por medio de props.
+4. Mostrar solo la seccion que coincida con el numero actual.
+   En el contenido usas && para cada pantalla:
 
-3. Conectar el menú lateral de Ant Design con ese número
+   {pagina === '1' && <Personal ... />}
+   {pagina === '2' && <Experiencia ... />}
 
-En la barra lateral (Sider), creas un <Menu> donde cada botón tiene una clave (key: '1', key: '2'). Al hacer clic, le dices a React que actualice la variable pagina:
+   Si pagina vale '1', solo se dibuja Personal. Si cambia a '2', desaparece
+   Personal y aparece Experiencia. Todo sin recargar la pagina.
 
-jsx
-<Menu
-  selectedKeys={[pagina]}
-  onClick={({ key }) => setPagina(key)}
-  items={[
-    { key: '1', label: 'Inicio' },
-    { key: '2', label: 'Experiencia' },
-    // ...
-  ]}
-/>
-4. Mostrar solo la sección que coincida con el número actual
+5. Footer fijo abajo, fuera de las condiciones. Siempre visible.
 
-En la zona del contenido (<Content>), colocas una condición con && para cada pantalla:
-
-jsx
-{pagina === '1' && <Personal perfil={perfil} onContacto={() => setPagina('5')} />}
-{pagina === '2' && <Experiencia experiencias={experiencias} />}
-{pagina === '3' && <Estudios estudios={estudios} />}
-Si pagina vale '1', React solo dibuja Personal.
-Cuando el usuario toca "Experiencia" en el menú, pagina pasa a valer '2', Personal desaparece y se muestra Experiencia. Todo sin recargar la página web.
-5. Dejar el Footer fijo abajo
-
-Colocas el <Footer /> justo debajo del <Content>, pero fuera de las condiciones. Así se muestra siempre, sin importar qué sección esté abierta.
-
-¿Por qué hacerlo así?
-
-Porque es fácil de entender, fácil de explicar y no requiere nada avanzado: solo un menú que cambia un número, y un contenido que muestra la pantalla que le corresponde a ese número.
+Por que hacerlo asi?
+Porque es facil de entender, facil de explicar en la evaluacion
+y no necesita nada avanzado.
 */
+
 export default App;

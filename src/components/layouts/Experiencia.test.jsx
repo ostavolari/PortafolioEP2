@@ -17,6 +17,6 @@ describe('Componente Experiencia', () => {
     render(<Experiencia experiencias={experiencias} />);
     expect(screen.getByText('Acme')).toBeInTheDocument();
     expect(screen.getByText('Desarrolladora')).toBeInTheDocument();
-    expect(screen.getByText('Ene 2023 – Actualidad')).toBeInTheDocument();
+    expect(screen.getByText('Ene 2023 - Actualidad')).toBeInTheDocument();
   });
 });

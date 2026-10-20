@@ -20,7 +20,7 @@ const proyectos = [
 ];
 
 describe('Componente Proyectos', () => {
-  it('debe mostrar el título de la sección', () => {
+  it('debe mostrar el titulo de la seccion', () => {
     render(<Proyectos />);
     expect(screen.getByRole('heading', { name: 'Desarrollos y Proyectos' })).toBeInTheDocument();
   });
@@ -42,10 +42,10 @@ describe('Componente Proyectos', () => {
     expect(screen.getByText('No hay proyectos para mostrar.')).toBeInTheDocument();
   });
 
-  it('debe avisar el texto de búsqueda', () => {
+  it('debe avisar el texto de busqueda', () => {
     const setBusqueda = vi.fn();
     render(<Proyectos proyectos={proyectos} setBusqueda={setBusqueda} />);
-    fireEvent.change(screen.getByPlaceholderText('Buscar proyecto por título'), {
+    fireEvent.change(screen.getByPlaceholderText('Buscar proyecto por titulo'), {
       target: { value: 'tie' },
     });
     expect(setBusqueda).toHaveBeenCalledWith('tie');

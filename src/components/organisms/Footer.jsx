@@ -1,4 +1,7 @@
+
 const Footer = ({ nombre, correo, ubicacion }) => {
+  
+  // getFullYear() devuelve el año actual dinamicamente (no hay que cambiarlo cada año)
   const anio = new Date().getFullYear();
 
   return (

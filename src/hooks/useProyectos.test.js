@@ -11,7 +11,7 @@ describe('useProyectos', () => {
     beforeEach(() => {
         vi.useFakeTimers()
     })
-
+    // esto restaura el reloj del sistema al terminar cada prueba para no afectar otros tests
     afterEach(() => {
         vi.useRealTimers()
     })
