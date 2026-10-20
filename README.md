@@ -97,10 +97,3 @@ src/
 └── setupTests.js                  # Configuración del entorno de pruebas JSDOM
 ```
 
----
-
-## 5. Personalización de Datos
-
-Todos los datos personales y de configuración se administran directamente como fuente de verdad en `src/App.jsx`.
-- Busca los comentarios marcados con `// ADJUNTA AQUI: (...)` para modificar tu nombre, perfil, experiencias, estudios, proyectos y redes.
-- Las imágenes personales o capturas de proyectos se pueden guardar en la carpeta `public/img/` y referenciarse como `/img/nombre-archivo.png`.
